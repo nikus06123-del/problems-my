@@ -11,6 +11,11 @@ vuln06_overflow = "EV2U5AjGiFhUPiNHFzZPYyn5E9HuNRdyfM92mShrqoEK"
 vuln07_reinit = "7CkJ3L8hpHbE6mDRvXwU7MyDNpEMw5prj3Tsujt9hLDU"
 vuln09_oracle_manipulation = "9hEAbWKYFmgjd3SBRsBU4yiyTiPEcaWqGM8ZUuKDcVW5"
 vuln10_reentrancy = "HPXU63wP1TBu6d78F5C8tyECCHBauZ5rPee44MFeotoC"
+vuln11_access_control = "J7Uo56tAnC8ke8kKNS975aYEpRgvRVBeZizHK2pqdmG2"
+vuln12_inflation = "DuwSRMJec2MxdQzhoT9T9mC5kfkRRGu1pLSg3nNV9b1g"
+vuln13_fake_sysvar = "EiFd2Ycg1u2e3snWdUKFmD18hHmDDa5TbUqxEDPpbuqf"
+vuln14_liquidation = "56zEiAzPEMuzd3rMAsa2qNM6cQ9mHEg4hLg38kQ4v5FW"
+vuln15_token_program = "E3k5CK9repYC1Phw4mUMRQaNrcdhpYpGS35AmFBP4pHk"
 
 # Native (non-Anchor) programs are pre-built by `anchor build` as workspace
 # members and loaded at validator start via test.genesis.

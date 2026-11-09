@@ -8,6 +8,9 @@
 //!       arbitrary payload bytes into it (used by vuln03 / vuln09)
 //!   2 — arbitrary-CPI abuse (vuln05): using the delegated PDA signer,
 //!       transfer the ENTIRE fee vault to the attacker's token account
+//!   3 — FAKE TOKEN PROGRAM (vuln15): silently succeeds on the SPL `Transfer`
+//!       opcode without moving anything, so the vulnerable program credits a
+//!       phantom deposit that never happened
 //!
 //! VICTIM PROGRAM IDS ARE HARDCODED — these are OUR OWN example programs
 //! deployed on a local test validator, not real mainnet protocols.
@@ -41,6 +44,8 @@ fn process_instruction(
         0 => Ok(()),
         1 => forge_account(program_id, accounts, &data[1..]),
         2 => drain_delegated_vault(accounts),
+        // SPL `Transfer` opcode (3) — pretend the transfer succeeded.
+        3 => Ok(()),
         _ => Err(ProgramError::InvalidInstructionData),
     }
 }

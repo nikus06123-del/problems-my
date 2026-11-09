@@ -36,6 +36,11 @@ export const PROG_IDS = {
   vuln08: new PublicKey("J1uGvwWWaxXroKxHjVHpgJ9eY8vp4r1iSXTpNYCHSP49"),
   vuln09: new PublicKey("9hEAbWKYFmgjd3SBRsBU4yiyTiPEcaWqGM8ZUuKDcVW5"),
   vuln10: new PublicKey("HPXU63wP1TBu6d78F5C8tyECCHBauZ5rPee44MFeotoC"),
+  vuln11: new PublicKey("J7Uo56tAnC8ke8kKNS975aYEpRgvRVBeZizHK2pqdmG2"),
+  vuln12: new PublicKey("DuwSRMJec2MxdQzhoT9T9mC5kfkRRGu1pLSg3nNV9b1g"),
+  vuln13: new PublicKey("EiFd2Ycg1u2e3snWdUKFmD18hHmDDa5TbUqxEDPpbuqf"),
+  vuln14: new PublicKey("56zEiAzPEMuzd3rMAsa2qNM6cQ9mHEg4hLg38kQ4v5FW"),
+  vuln15: new PublicKey("E3k5CK9repYC1Phw4mUMRQaNrcdhpYpGS35AmFBP4pHk"),
   attacker: new PublicKey("J4veNunZYUEu59ta7EjjRk4RE9CFnbB5jm8W4dCsJPU3"),
 };
 

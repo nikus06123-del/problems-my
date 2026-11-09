@@ -29,6 +29,11 @@ solana-test-validator --reset \
   --bpf-program J1uGvwWWaxXroKxHjVHpgJ9eY8vp4r1iSXTpNYCHSP49 target/deploy/vuln08_duplicate_accounts.so \
   --bpf-program 9hEAbWKYFmgjd3SBRsBU4yiyTiPEcaWqGM8ZUuKDcVW5 target/deploy/vuln09_oracle_manipulation.so \
   --bpf-program HPXU63wP1TBu6d78F5C8tyECCHBauZ5rPee44MFeotoC target/deploy/vuln10_reentrancy.so \
+  --bpf-program J7Uo56tAnC8ke8kKNS975aYEpRgvRVBeZizHK2pqdmG2 target/deploy/vuln11_access_control.so \
+  --bpf-program DuwSRMJec2MxdQzhoT9T9mC5kfkRRGu1pLSg3nNV9b1g target/deploy/vuln12_inflation.so \
+  --bpf-program EiFd2Ycg1u2e3snWdUKFmD18hHmDDa5TbUqxEDPpbuqf target/deploy/vuln13_fake_sysvar.so \
+  --bpf-program 56zEiAzPEMuzd3rMAsa2qNM6cQ9mHEg4hLg38kQ4v5FW target/deploy/vuln14_liquidation.so \
+  --bpf-program E3k5CK9repYC1Phw4mUMRQaNrcdhpYpGS35AmFBP4pHk target/deploy/vuln15_token_program.so \
   --bpf-program J4veNunZYUEu59ta7EjjRk4RE9CFnbB5jm8W4dCsJPU3 target/deploy/attacker.so \
   > /tmp/validator.log 2>&1 &
 

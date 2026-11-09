@@ -8,3 +8,4 @@ keys/*.json
 .env
 .test-ledger
 test-ledger
+native-programs/**/target

@@ -1,6 +1,6 @@
 # База знаний: уязвимости Solana-программ, приводящие к краже средств
 
-Этот каталог — практическая база знаний по 10 классам уязвимостей Solana-программ,
+Этот каталог — практическая база знаний по 15 классам уязвимостей Solana-программ,
 каждая из которых **доказуемо приводит к краже активов**. Для каждого класса:
 
 - уязвимая программа (Anchor или нативный Rust),
@@ -15,7 +15,7 @@
 yarn install                     # зависимости TS-клиента
 anchor build                     # сборка всех программ + IDL
 python3 scripts/fix_idl.py       # приведение IDL к формату клиента 0.32
-./scripts/run_tests.sh           # валидатор + все 22 exploit-теста
+./scripts/run_tests.sh           # валидатор + все 34 exploit-теста
 ```
 
 Каждый тест пишет жертве/злоумышленнику балансы, выполняет легитимные
@@ -35,13 +35,18 @@ python3 scripts/fix_idl.py       # приведение IDL к формату к
 | 08 | [duplicate_accounts](08_duplicate_accounts.md) | Повтор одного аккаунта в списке | Резерв обеспеченности | Класс из руководств по аудиту (Neodyme «Think Memory») |
 | 09 | [oracle_manipulation](09_oracle_manipulation.md) | Непроверенный оракул цен | Вся ликвидность lending-хранилища | **Mango Markets** (2022, ~$114M) |
 | 10 | [reentrancy](10_reentrancy.md) | Нарушенный порядок «проверки-эффекты-взаимодействия» | Двойные выплаты reward-хранилища | Класс Ethereum-подобных атак; в Solana частично закрыт рантаймом |
+| 11 | [access_control](11_access_control.md) | Нет проверки прав на привилегированную инструкцию | Комиссии протокола | **Raydium** (2022, ~$4.4M) — класс missing authority check |
+| 12 | [inflation](12_inflation.md) | Share-inflation (первый депонент + донат + округление) | Депозиты последующих пользователей | ERC-4626 inflation attack (Bezier, 2022); класс в Solana-аудитах |
+| 13 | [fake_sysvar](13_fake_sysvar.md) | Подделка sysvar (Clock) → обход тайм-чеков | Эскроу действующих ордеров | Класс unchecked sysvar (Neodyme/Sec3) |
+| 14 | [liquidation](14_liquidation.md) | Ликвидация без health-check | Залог здоровых позиций + бонус | Класс аудитов лендингов (fork'и Compound) |
+| 15 | [token_program](15_token_program.md) | Непроверенная token-программа (фейковый CPI) | Всё SOL-хранилище через фантомный депозит | Класс Token-2022 перехода (2023–2024) |
 
 ## Структура репозитория
 
 ```
-programs/           10 уязвимых Anchor-программ (по одной на класс)
+programs/           13 уязвимых Anchor-программ (по одной на класс)
 native-programs/    нативные (без Anchor) уязвимые программы + программа атакующего
-tests/              10 exploit-тестов на TypeScript (ts-mocha)
+tests/              15 exploit-тестов на TypeScript (ts-mocha), 34 сценария
 scripts/run_tests.sh  полный прогон: сборка, валидатор, тесты
 scripts/fix_idl.py    пост-обработка IDL под клиента Anchor 0.32
 docs/               эта база знаний
