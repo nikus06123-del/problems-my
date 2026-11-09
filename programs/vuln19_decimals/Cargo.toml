@@ -1,0 +1,16 @@
+[package]
+name = "vuln19-decimals"
+version = "0.1.0"
+edition = "2021"
+
+[lib]
+crate-type = ["cdylib", "lib"]
+name = "vuln19_decimals"
+
+[dependencies]
+anchor-lang = { version = "0.32.1", features = ["init-if-needed"] }
+anchor-spl = { version = "0.32.1", default-features = false, features = ["token", "token_2022"] }
+
+# Required by `anchor build` for IDL generation
+[features]
+idl-build = ["anchor-lang/idl-build", "anchor-spl/idl-build"]

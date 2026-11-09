@@ -16,6 +16,11 @@ vuln12_inflation = "DuwSRMJec2MxdQzhoT9T9mC5kfkRRGu1pLSg3nNV9b1g"
 vuln13_fake_sysvar = "EiFd2Ycg1u2e3snWdUKFmD18hHmDDa5TbUqxEDPpbuqf"
 vuln14_liquidation = "56zEiAzPEMuzd3rMAsa2qNM6cQ9mHEg4hLg38kQ4v5FW"
 vuln15_token_program = "E3k5CK9repYC1Phw4mUMRQaNrcdhpYpGS35AmFBP4pHk"
+vuln16_close_reuse = "DT96jaDJ52QzTiVQFxjokispd9QZ2jostRpUZQQ1ooWG"
+vuln17_return_data = "J247M7nb2BC6LGtauptEUKjizFwEaPfUe1iepz2xbyco"
+vuln18_token2022 = "GZe9eTjFeWcN1jZWxasTESn6BzqoGLeQxW5YQ4MiaPhx"
+vuln19_decimals = "2ujSuQ9sAjyaBij29XXh8UktiRmqq5eaddKRz3zfTNpF"
+vuln20_escrow_authority = "BYmkvyqBEKQW4mjwHj2eP1w75VxiokGvjzvYxG8mmmnN"
 
 # Native (non-Anchor) programs are pre-built by `anchor build` as workspace
 # members and loaded at validator start via test.genesis.
@@ -30,6 +35,10 @@ program = "target/deploy/vuln08_duplicate_accounts.so"
 [[test.genesis]]
 address = "J4veNunZYUEu59ta7EjjRk4RE9CFnbB5jm8W4dCsJPU3"
 program = "target/deploy/attacker.so"
+
+[[test.genesis]]
+address = "9ehT6ukwn5FVtm3AmJicSkFYgJ6nLwy7Ku634rbSDymv"
+program = "target/deploy/oracle.so"
 
 [registry]
 url = "https://api.apr.dev"

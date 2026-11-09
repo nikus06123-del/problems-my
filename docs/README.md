@@ -1,6 +1,6 @@
 # База знаний: уязвимости Solana-программ, приводящие к краже средств
 
-Этот каталог — практическая база знаний по 15 классам уязвимостей Solana-программ,
+Этот каталог — практическая база знаний по 20 классам уязвимостей Solana-программ,
 каждая из которых **доказуемо приводит к краже активов**. Для каждого класса:
 
 - уязвимая программа (Anchor или нативный Rust),
@@ -12,10 +12,10 @@
 ## Быстрый старт
 
 ```bash
-yarn install                     # зависимости TS-клиента
+npm install                     # зависимости TS-клиента
 anchor build                     # сборка всех программ + IDL
 python3 scripts/fix_idl.py       # приведение IDL к формату клиента 0.32
-./scripts/run_tests.sh           # валидатор + все 34 exploit-теста
+./scripts/run_tests.sh           # валидатор + все 46 exploit-тестов
 ```
 
 Каждый тест пишет жертве/злоумышленнику балансы, выполняет легитимные
@@ -40,13 +40,18 @@ python3 scripts/fix_idl.py       # приведение IDL к формату к
 | 13 | [fake_sysvar](13_fake_sysvar.md) | Подделка sysvar (Clock) → обход тайм-чеков | Эскроу действующих ордеров | Класс unchecked sysvar (Neodyme/Sec3) |
 | 14 | [liquidation](14_liquidation.md) | Ликвидация без health-check | Залог здоровых позиций + бонус | Класс аудитов лендингов (fork'и Compound) |
 | 15 | [token_program](15_token_program.md) | Непроверенная token-программа (фейковый CPI) | Всё SOL-хранилище через фантомный депозит | Класс Token-2022 перехода (2023–2024) |
+| 16 | [close_reuse](16_close_reuse.md) | Close + воскрешение аккаунта (UAF в одной транзакции) | Весь vault за одну атомарную транзакцию | Neodyme «Closing Accounts»; OptiFi (2022) |
+| 17 | [return_data](17_return_data.md) | Доверие get_return_data без проверки program_id | Вся казна по фейковой цене оракула | Класс unchecked CPI source (Sec3/Neodyme) |
+| 18 | [token2022](18_token2022.md) | Token-2022 transfer fee против номинального учёта | Fee с каждого buy-back, до опустошения казны | Класс расширений Token-2022 (2024–2026) |
+| 19 | [decimals](19_decimals.md) | Непроверенные decimals mint'а (unit confusion) | Весь payout-хранилище | Класс «decimals not checked» (Sec3 X-Ray) |
+| 20 | [escrow_authority](20_escrow_authority.md) | Привилегированный PDA выводится из непроверенного аккаунта | Чужой escrow без подписи владельца | Класс «unvalidated authority derivation» (аудиты AMM/эскроу) |
 
 ## Структура репозитория
 
 ```
-programs/           13 уязвимых Anchor-программ (по одной на класс)
-native-programs/    нативные (без Anchor) уязвимые программы + программа атакующего
-tests/              15 exploit-тестов на TypeScript (ts-mocha), 34 сценария
+programs/           18 уязвимых Anchor-программ (по одной на класс)
+native-programs/    нативные уязвимые программы + attacker + честный oracle
+tests/              20 exploit-тестов на TypeScript (ts-mocha), 46 сценариев
 scripts/run_tests.sh  полный прогон: сборка, валидатор, тесты
 scripts/fix_idl.py    пост-обработка IDL под клиента Anchor 0.32
 docs/               эта база знаний

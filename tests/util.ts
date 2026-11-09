@@ -41,7 +41,13 @@ export const PROG_IDS = {
   vuln13: new PublicKey("EiFd2Ycg1u2e3snWdUKFmD18hHmDDa5TbUqxEDPpbuqf"),
   vuln14: new PublicKey("56zEiAzPEMuzd3rMAsa2qNM6cQ9mHEg4hLg38kQ4v5FW"),
   vuln15: new PublicKey("E3k5CK9repYC1Phw4mUMRQaNrcdhpYpGS35AmFBP4pHk"),
+  vuln16: new PublicKey("DT96jaDJ52QzTiVQFxjokispd9QZ2jostRpUZQQ1ooWG"),
+  vuln17: new PublicKey("J247M7nb2BC6LGtauptEUKjizFwEaPfUe1iepz2xbyco"),
+  vuln18: new PublicKey("GZe9eTjFeWcN1jZWxasTESn6BzqoGLeQxW5YQ4MiaPhx"),
+  vuln19: new PublicKey("2ujSuQ9sAjyaBij29XXh8UktiRmqq5eaddKRz3zfTNpF"),
+  vuln20: new PublicKey("BYmkvyqBEKQW4mjwHj2eP1w75VxiokGvjzvYxG8mmmnN"),
   attacker: new PublicKey("J4veNunZYUEu59ta7EjjRk4RE9CFnbB5jm8W4dCsJPU3"),
+  oracle: new PublicKey("9ehT6ukwn5FVtm3AmJicSkFYgJ6nLwy7Ku634rbSDymv"),
 };
 
 export const provider = anchor.getProvider() as AnchorProvider;

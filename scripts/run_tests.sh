@@ -34,7 +34,13 @@ solana-test-validator --reset \
   --bpf-program EiFd2Ycg1u2e3snWdUKFmD18hHmDDa5TbUqxEDPpbuqf target/deploy/vuln13_fake_sysvar.so \
   --bpf-program 56zEiAzPEMuzd3rMAsa2qNM6cQ9mHEg4hLg38kQ4v5FW target/deploy/vuln14_liquidation.so \
   --bpf-program E3k5CK9repYC1Phw4mUMRQaNrcdhpYpGS35AmFBP4pHk target/deploy/vuln15_token_program.so \
+  --bpf-program DT96jaDJ52QzTiVQFxjokispd9QZ2jostRpUZQQ1ooWG target/deploy/vuln16_close_reuse.so \
+  --bpf-program J247M7nb2BC6LGtauptEUKjizFwEaPfUe1iepz2xbyco target/deploy/vuln17_return_data.so \
+  --bpf-program GZe9eTjFeWcN1jZWxasTESn6BzqoGLeQxW5YQ4MiaPhx target/deploy/vuln18_token2022.so \
+  --bpf-program 2ujSuQ9sAjyaBij29XXh8UktiRmqq5eaddKRz3zfTNpF target/deploy/vuln19_decimals.so \
+  --bpf-program BYmkvyqBEKQW4mjwHj2eP1w75VxiokGvjzvYxG8mmmnN target/deploy/vuln20_escrow_authority.so \
   --bpf-program J4veNunZYUEu59ta7EjjRk4RE9CFnbB5jm8W4dCsJPU3 target/deploy/attacker.so \
+  --bpf-program 9ehT6ukwn5FVtm3AmJicSkFYgJ6nLwy7Ku634rbSDymv target/deploy/oracle.so \
   > /tmp/validator.log 2>&1 &
 
 echo "waiting for validator..."
@@ -45,11 +51,11 @@ done
 solana cluster-version
 
 export ANCHOR_PROVIDER_URL="http://127.0.0.1:8899"
-export ANCHOR_WALLET="$HOME/.config/solana/id.json"
+export ANCHOR_WALLET="${ANCHOR_WALLET:-$HOME/.config/solana/id.json}"
 
 if [ ! -x node_modules/.bin/ts-mocha ]; then
   echo "installing node deps..."
-  yarn install --silent > /dev/null 2>&1
+  npm install --no-audit --no-fund > /dev/null 2>&1
 fi
 
 # IDLs are generated in the new spec format; the TS client needs account
@@ -57,9 +63,9 @@ fi
 python3 scripts/fix_idl.py
 
 if [ $# -gt 0 ]; then
-  yarn ts-mocha -p ./tsconfig.json -t 1000000 "$@"
+  npx ts-mocha -p ./tsconfig.json -t 1000000 "$@"
 else
-  yarn ts-mocha -p ./tsconfig.json -t 1000000 'tests/**/*.test.ts'
+  npx ts-mocha -p ./tsconfig.json -t 1000000 'tests/**/*.test.ts'
 fi
 EXIT=$?
 pkill -f solana-test-validator 2>/dev/null || true

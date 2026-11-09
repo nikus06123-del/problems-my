@@ -11,6 +11,9 @@
 //!   3 — FAKE TOKEN PROGRAM (vuln15): silently succeeds on the SPL `Transfer`
 //!       opcode without moving anything, so the vulnerable program credits a
 //!       phantom deposit that never happened
+//!   7 — FAKE PRICE ORACLE (vuln17): answers the "get price" op (7) with an
+//!       inflated price via set_return_data, poisoning the vulnerable
+//!       program's return-data-based price feed
 //!
 //! VICTIM PROGRAM IDS ARE HARDCODED — these are OUR OWN example programs
 //! deployed on a local test validator, not real mainnet protocols.
@@ -46,6 +49,13 @@ fn process_instruction(
         2 => drain_delegated_vault(accounts),
         // SPL `Transfer` opcode (3) — pretend the transfer succeeded.
         3 => Ok(()),
+        // Fake price oracle (vuln17): reply to the "get price" op with an
+        // inflated price through set_return_data.
+        7 => {
+            // 1_999_000_000 lamports per lot — ~2000x the honest 0.001 SOL.
+            solana_program::program::set_return_data(&1_999_000_000u64.to_le_bytes());
+            Ok(())
+        }
         _ => Err(ProgramError::InvalidInstructionData),
     }
 }
