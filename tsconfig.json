@@ -1,0 +1,14 @@
+{
+  "compilerOptions": {
+    "types": ["mocha", "node"],
+    "lib": ["es2015", "es2020"],
+    "module": "commonjs",
+    "target": "es6",
+    "esModuleInterop": true,
+    "resolveJsonModule": true,
+    "strict": false,
+    "skipLibCheck": true,
+    "outDir": ".ts-build"
+  },
+  "include": ["tests/**/*.ts", "scripts/**/*.ts"]
+}

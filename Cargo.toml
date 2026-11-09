@@ -1,0 +1,14 @@
+[workspace]
+members = ["programs/*"]
+# Native (non-Anchor) programs live in native-programs/ and are built
+# standalone with cargo-build-sbf so `anchor build` does not try to
+# generate Anchor IDLs for them.
+resolver = "2"
+
+# NOTE: overflow-checks are deliberately DISABLED at workspace level.
+# Many production protocols ship this way, and vuln06 (overflow/underflow)
+# demonstrates exactly what happens when a single arithmetic op is unchecked
+# in such a configuration. Do not copy this profile into real projects.
+[profile.release]
+overflow-checks = false
+debug-assertions = false

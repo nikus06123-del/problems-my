@@ -1,0 +1,13 @@
+[package]
+name = "vuln05-arbitrary-cpi"
+version = "0.1.0"
+edition = "2021"
+
+[lib]
+crate-type = ["cdylib", "lib"]
+name = "vuln05_arbitrary_cpi"
+
+[dependencies]
+solana-program = "=2.1.11"
+
+[workspace]

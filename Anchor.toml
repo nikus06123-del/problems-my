@@ -1,0 +1,37 @@
+[features]
+seeds = false
+skip-lint = false
+
+[programs.localnet]
+vuln01_missing_signer = "6TSqBs2dvRzsDg52g9qh8Nf4TUKRdAM5YjjoXyHFpDh8"
+vuln02_account_substitution = "1XeQ8irpogAJTxNP7MiAk5SgAi7UZkyi7RmTASxVhRY"
+vuln03_forged_state = "H1W4DzzYBd6iz6UnqEddqjSVcZyFQanJPmSSZt79LJYu"
+vuln04_pda_confusion = "EUHsG3fkkb4EohJBdy9HJbZEKS8UecKQej5uQk1S1hSr"
+vuln06_overflow = "EV2U5AjGiFhUPiNHFzZPYyn5E9HuNRdyfM92mShrqoEK"
+vuln07_reinit = "7CkJ3L8hpHbE6mDRvXwU7MyDNpEMw5prj3Tsujt9hLDU"
+vuln09_oracle_manipulation = "9hEAbWKYFmgjd3SBRsBU4yiyTiPEcaWqGM8ZUuKDcVW5"
+vuln10_reentrancy = "HPXU63wP1TBu6d78F5C8tyECCHBauZ5rPee44MFeotoC"
+
+# Native (non-Anchor) programs are pre-built by `anchor build` as workspace
+# members and loaded at validator start via test.genesis.
+[[test.genesis]]
+address = "HVKUuXZRopCRHD6Ne2KJ3Aqapb99sHRdhG8asyDdz1NQ"
+program = "target/deploy/vuln05_arbitrary_cpi.so"
+
+[[test.genesis]]
+address = "J1uGvwWWaxXroKxHjVHpgJ9eY8vp4r1iSXTpNYCHSP49"
+program = "target/deploy/vuln08_duplicate_accounts.so"
+
+[[test.genesis]]
+address = "J4veNunZYUEu59ta7EjjRk4RE9CFnbB5jm8W4dCsJPU3"
+program = "target/deploy/attacker.so"
+
+[registry]
+url = "https://api.apr.dev"
+
+[provider]
+cluster = "localnet"
+wallet = "~/.config/solana/id.json"
+
+[scripts]
+test = "yarn run ts-mocha -p ./tsconfig.json -t 1000000 tests/**/*.test.ts"
